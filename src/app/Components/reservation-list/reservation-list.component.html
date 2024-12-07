@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-8 col-sm-12 m-auto">
+    <h2>Reservation list</h2>
+    <table class="table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Guest</th>
+          <th scope="col">Email</th>
+          <th scope="col">Room No</th>
+          <th scope="col">Check In</th>
+          <th scope="col">Check Out</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(reservation of reservations; track reservation.guestEmail){
+        <tr class="align-middle">
+          <td>{{ reservation.guestName }}</td>
+          <td>{{ reservation.guestEmail }}</td>
+          <td>{{ reservation.roomNumber }}</td>
+          <td>{{ reservation.checkInDate }}</td>
+          <td>{{ reservation.checkOutDate }}</td>
+          <td>
+            <button
+              class="btn btn-warning me-2"
+              [routerLink]="['/edit', reservation.id]"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-danger"
+              (click)="handleDeleteReservation(reservation.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        }@empty {
+        <p class="text-center my-5">There are no items.</p>
+        }
+      </tbody>
+    </table>
+    <div class="mt-5 d-flex justify-content-between align-items-center">
+      <button class="btn btn-primary" routerLink="/">Back to home</button>
+      <button class="btn btn-warning" [routerLink]="['/new']">
+        Back to reservation form
+      </button>
+    </div>
+  </div>
+</div>
